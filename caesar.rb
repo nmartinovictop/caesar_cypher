@@ -1,20 +1,26 @@
-def caesar_cipher(message,offset)
-    alphabet = 'abcdefghijklmnopqrstuvwxyz'
-    new_message = ''
+# > caesar_cipher("What a string!", 5)
+# => "Bmfy f xywnsl!"
 
-    message.each_char do |l|
-        if !alphabet.include?(l.downcase)
-            new_message += l
-            next
-        end
-        original_letter_index = alphabet.index(l.downcase)
-        new_letter_index = (original_letter_index + offset) % 26
-        new_message += l.upcase == l ? alphabet[new_letter_index].upcase : alphabet[new_letter_index]
 
+ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+def caesar_cipher(phrase,offset)
+
+  phrase_list = phrase.split("")
+  new_phrase = []
+  phrase_list.each do |l|
+
+    if ALPHABET.index(l.upcase) != nil
+      
+      letter_to_add = ALPHABET[(ALPHABET.index(l.upcase) + offset) % 26]
+
+      new_phrase << (l.upcase == l ? letter_to_add : letter_to_add.downcase)
+    else 
+      new_phrase << l
     end
 
-    new_message
-
+  end
+  new_phrase.join("")
 end
 
 
